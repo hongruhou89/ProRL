@@ -9,7 +9,7 @@ echo "script pwd: $(pwd)"
 
 # Bash list
 scripts=(
-#    "$SCRIPT_DIR/RL/run_ml1m_prorl.sh"
+   "$SCRIPT_DIR/RL/run_ml1m_prorl.sh"
    "$SCRIPT_DIR/RL/run_steam_prorl.sh"
    "$SCRIPT_DIR/RL/run_books_prorl.sh"
 )

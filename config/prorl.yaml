@@ -32,10 +32,10 @@ patience: 100            # Early stopping. Stop training after n epochs without 
 
 topk: [1,5,10]
 
-metrics: [ctr_max,coherence_max,IoI_max,IoR_max,error]  # 针对引导式推荐任务
+metrics: [ctr_max,coherence_max,IoI_max,IoR_max,error]
 val_metric: IoI_max@1
 val_ratio: 1.0
-val_delay: 160  # 多少个epoch之后开始计算推荐的指标, e.g. 100
+val_delay: 100  # when to evaluate for pretrain stage
 
 # Config for proactive rec
 max_proactive_length: 10
