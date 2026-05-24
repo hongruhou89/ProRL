@@ -7,6 +7,7 @@ cd "$PROJECT_ROOT"
 
 echo "script pwd: $(pwd)"
 
+# Bash list
 scripts=(
    "$SCRIPT_DIR/Pretrain/run_ml1m_pretrain.sh"
    "$SCRIPT_DIR/Pretrain/run_steam_pretrain.sh"
