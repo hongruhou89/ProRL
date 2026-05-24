@@ -8,7 +8,6 @@
 <p align="center">
   <a href="#-overview">Overview</a> •
   <a href="#-installation">Installation</a> •
-  <a href="#-data-preparation">Data</a> •
   <a href="#-quick-start">Quick Start</a> •
   <a href="#-training">Training</a> •
   <a href="#-evaluation">Evaluation</a>
