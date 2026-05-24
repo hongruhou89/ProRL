@@ -20,20 +20,20 @@
 
 **ProRL** is a framework for **Proactive Recommendation** that combines semantic-ID item representations with reinforcement learning. The model learns to generate item trajectories that gradually steer users toward a target item while jointly optimizing several objectives:
 
-- **IoI (Increase of Interest)** — increase in the probability of the user engaging with the target item.
-- **IoR (Increase of Rank)** — improvement in the ranking of the target item.
-- **CTR (Click-Through Rate)** — predicted click probability of the recommended intermediate items.
+- **IoI (Increase of Interest)** — Increase in the probability of the user engaging with the target item.
+- **IoR (Increase of Rank)** — Increase in the ranking of the target item.
+- **CTR (Click-Through Rate)** — Predicted click probability of the recommended intermediate items.
 
 <p align="center">
-  <img src="fig/framework.png" alt="ProRL Framework" width="85%">
+  <img src="fig/framework.png" alt="ProRL Framework" width="100%">
 </p>
 
 ### Key Features
 
-- 🎯 **Multi-objective reward** — jointly optimizes IoI, IoR and CTR with configurable weights.
-- 🔄 **Rectified policy gradient (ProRL)** — stable RL training with KL-divergence regularization toward the pretrained reference policy.
-- 📊 **Semantic-ID tokenization** — items are represented as short codes from a learned codebook.
-- ⚡ **Distributed training** — multi-GPU training via 🤗 Accelerate.
+- 🎯 **Multi-objective reward** — Jointly optimizes IoI, IoR and CTR with configurable weights.
+- 🔄 **Rectified policy gradient (ProRL)** — Stable RL training with KL-divergence regularization toward the pretrained reference policy.
+- 📊 **Semantic-ID tokenization** — Items are represented as short codes from a learned codebook.
+- ⚡ **Distributed training** — Multi-GPU training via 🤗 Accelerate.
 
 ---
 
