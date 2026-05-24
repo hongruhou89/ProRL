@@ -69,57 +69,6 @@ pip install numpy==1.26.0
 
 ---
 
-## 📦 Data Preparation
-
-### Expected layout
-
-Place all datasets under `datasets/` at the project root. Each dataset folder must contain the four files below:
-
-```
-datasets/
-├── ml-1m/
-│   ├── ml-1m.train                       # training sequences   (JSON)
-│   ├── ml-1m.val                         # validation sequences (JSON)
-│   ├── ml-1m.test                        # test sequences       (JSON)
-│   ├── ml-1m.datamaps                    # ID & attribute maps  (JSON)
-│   └── qwen3-embedding-8b-pca.sem_ids    # semantic IDs         (JSON)
-├── Steam/
-│   └── ... (same structure, prefix "Steam")
-└── Books/
-    └── ... (same structure, prefix "Books")
-```
-
-> The semantic-ID file name is controlled by `token_prefix` / `token_suffix` in the config (default `qwen3-embedding-8b-pca.sem_ids`).
-
-### Raw data sources
-
-| Dataset | Description | Link |
-|---------|-------------|------|
-| ML-1M | MovieLens-1M | [Download](https://grouplens.org/datasets/movielens/1m/) |
-| Steam | Steam Video Games | [Download](https://cseweb.ucsd.edu//~jmcauley/datasets.html#steam_data/) |
-| Books | Amazon Books | [Download](https://cseweb.ucsd.edu/~jmcauley/datasets/amazon_v2/) |
-
-### SASRec evaluator checkpoints
-
-The RL stage uses a pretrained **SASRec** model (via [RecBole](https://github.com/RUCAIBox/RecBole)) as a reward model / evaluator. Before launching ProRL, train SASRec on each dataset and place the checkpoints at the paths expected by RecBole:
-
-```
-ckpt/
-├── SASRec-ml-1m-sas.pth
-├── SASRec-steam-merged.pth
-└── SASRec-amazon-books.pth
-```
-
-The matching evaluator configs are provided in `config/`:
-- `config/ml-1m-sas_sasrec_config.yaml`
-- `config/steam-merged_sasrec_config.yaml`
-- `config/amazon-books_sasrec_config.yaml`
-
-> The mapping from our dataset name to the RecBole dataset name is fixed inside `evaluator.py`:
-> `ml-1m → ml-1m-sas`, `Steam → steam-merged`, `Books → amazon-books`.
-
----
-
 ## 🚀 Quick Start
 
 All training is launched through ready-to-use shell scripts in `scripts/`. They handle the `accelerate` launch, paths and hyperparameters for you.
