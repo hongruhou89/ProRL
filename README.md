@@ -120,46 +120,11 @@ The matching evaluator configs are provided in `config/`:
 
 All training is launched through ready-to-use shell scripts in `scripts/`. They handle the `accelerate` launch, paths and hyperparameters for you.
 
-### Pretrain a single dataset
-
-```bash
-# ML-1M
-bash scripts/Pretrain/run_ml1m_pretrain.sh
-
-# Steam
-bash scripts/Pretrain/run_steam_pretrain.sh
-
-# Amazon Books
-bash scripts/Pretrain/run_books_pretrain.sh
-```
-
-### Pretrain all three datasets sequentially
-
-```bash
-bash scripts/run_pretrain.sh
-```
-
-### ProRL fine-tuning of a single dataset
-
-```bash
-# ML-1M
-bash scripts/RL/run_ml1m_prorl.sh
-
-# Steam
-bash scripts/RL/run_steam_prorl.sh
-
-# Amazon Books
-bash scripts/RL/run_books_prorl.sh
-```
-
-### ProRL fine-tuning on all three datasets sequentially
+### ProRL on all three datasets sequentially
 
 ```bash
 bash scripts/run_prorl.sh
 ```
-
-> ⚠️ Before launching any RL script, open it and set `--pretrained_ckpt` to the actual `.pth` file produced by your pretraining run (under `ckpt/<dataset>/<run-id>/<run-id>.pth`).
-
 ---
 
 ## 🏋️ Training
@@ -224,33 +189,7 @@ python -m accelerate.commands.launch \
 | `--reward_weight_ioi` | Weight of the IoI reward term | `1.0` |
 | `--reward_weight_ior` | Weight of the IoR reward term | `1.0` |
 
-#### Hyperparameters we used per dataset
-
-| Dataset | `prorl_lr` | `prorl_beta` | `reward_weight_ctr` | `reward_weight_ioi` | `reward_weight_ior` |
-|---------|-----------|-------------|--------------------|--------------------|--------------------|
-| ML-1M | `1e-4` | `1e-2` | `1.0` | `1.0` | `1.0` |
-| Steam | `1e-5` | `1e-2` | `0.1` | `1.0` | `1.0` |
-| Books | `5e-4` | `1e-2` | `1.0` | `1.0` | `1.0` |
-
-These match the defaults baked into `scripts/RL/run_<dataset>_prorl.sh`.
-
 ---
-
-## 📊 Evaluation
-
-To evaluate a ProRL checkpoint without further training, run the same entry point with `--mode eval`:
-
-```bash
-PYTHONNOUSERSITE=1 \
-CUDA_VISIBLE_DEVICES=0 \
-python -m accelerate.commands.launch \
-  --num_processes 1 \
-  ./Proactive_RL_prorl.py \
-  --dataset ml-1m \
-  --config_file ./config/prorl.yaml \
-  --pretrained_ckpt ./ckpt/ml-1m/<your-prorl-run>/<your-prorl-run>.pth \
-  --mode eval
-```
 
 ### Reported metrics
 
@@ -290,14 +229,6 @@ token_prefix: "qwen3-embedding-8b-pca"
 token_suffix: "sem_ids"
 ```
 
-### Accelerate launcher — `config/rec_config.yaml`
-
-```yaml
-distributed_type: MULTI_GPU
-mixed_precision: bf16
-num_processes: 2     # overridden on the CLI by --num_processes
-```
-
 ---
 
 ## 📁 Project Structure
@@ -327,8 +258,6 @@ ProRL/
 │
 ├── datasets/                            # Datasets go here (you create this)
 ├── ckpt/                                # Checkpoints (auto-created)
-├── run_logs/                            # Training logs   (auto-created)
-├── tensorboard/                         # TensorBoard logs (auto-created)
 │
 ├── proactive_pretrain.py                # Stage-1 entry point
 ├── Proactive_RL_prorl.py                # Stage-2 (ProRL) entry point
@@ -348,6 +277,6 @@ ProRL/
 
 ## 🙏 Acknowledgments
 
-- [RecBole](https://github.com/RUCAIBox/RecBole) — sequential recommendation baselines and the SASRec evaluator.
+- [RecBole](https://github.com/RUCAIBox/RecBole) — sequential recommendation baselines and the SASRec and GRU4Rec evaluator.
 - [Hugging Face Transformers](https://github.com/huggingface/transformers) — T5 implementation.
 - [Hugging Face Accelerate](https://github.com/huggingface/accelerate) — distributed training.
