@@ -24,6 +24,10 @@
 - **IoR (Increase of Rank)** — improvement in the ranking of the target item.
 - **CTR (Click-Through Rate)** — predicted click probability of the recommended intermediate items.
 
+<p align="center">
+  <img src="fig/framework.png" alt="ProRL Framework" width="85%">
+</p>
+
 ### Key Features
 
 - 🎯 **Multi-objective reward** — jointly optimizes IoI, IoR and CTR with configurable weights.
