@@ -1,0 +1,49 @@
+# gru4rec_config.yaml
+data_path: ./datasets/
+dataset: amazon-books
+gpu_id: 3
+
+USER_ID_FIELD: user_id          # (str) Field name of user ID feature.
+ITEM_ID_FIELD: item_id          # (str) Field name of item ID feature.
+
+TIME_FIELD: timestamp           # (str) Field name of timestamp feature.
+seq_len: ~                      # (dict) Field name of sequence feature: maximum length of each sequence
+threshold: ~                    # (dict) 0/1 labels will be generated according to the pairs.
+NEG_PREFIX: neg_                # (str) Negative sampling prefix for pair-wise dataLoaders.
+
+# Sequential Model Needed
+LIST_SUFFIX: _list              # (str) Suffix of field names which are generated as sequences.
+# POSITION_FIELD: position_id     # (str) Field name of the generated position sequence.
+
+load_col:                       # (dict) The suffix of atomic files: (list) field names to be loaded.
+    inter: [user_id, item_id, rating, timestamp]
+    item: [item_id, genres]
+
+eval_setting: TO_LS, full
+metrics: [Recall, MRR, NDCG, Precision]
+topk: [10, 20]
+valid_metric: MRR@10
+
+train_neg_sample_args: ~
+
+model: GRU4Rec
+
+# Hyperparameters
+embedding_size: 64      
+hidden_size: 128        
+num_layers: 1           
+dropout_prob: 0.3       
+
+loss_type: 'CE'
+
+MAX_ITEM_LIST_LENGTH: 50
+
+learning_rate: 0.001
+train_batch_size: 4096
+eval_batch_size: 4096
+epochs: 100
+stopping_step: 50
+
+optimizer: 'adam'
+
+checkpoint_dir: 'ckpt'

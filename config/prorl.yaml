@@ -1,0 +1,80 @@
+# Overwritting configs
+rand_seed: 2024
+reproducibility: true
+proactive: 1
+
+num_proc: 64
+data_dir: datasets/
+log_dir: run_logs/
+tensorboard_log_dir: tensorboard/
+ckpt_dir: ckpt/
+
+stage: pretrain        # pretrain or finetune
+pretrained_model: ""
+
+
+# data selection
+epoch_per_stage: [80, 40, 40, 40, 40, 40, 40, 40, 40]
+tau: 1.0
+load_best_for_next_stage: False
+
+train_batch_size: 128
+eval_batch_size: 64
+lr: 0.005
+weight_decay: 0.05
+warmup_steps: 10000
+steps: ~
+epochs: 400
+max_grad_norm: 1.0      # None for no clipping, else a float value
+eval_interval: 1        # Evaluate every n epochs
+save_interval: 1
+patience: 100            # Early stopping. Stop training after n epochs without improvement. Set to None to disable
+
+topk: [1,5,10]
+
+metrics: [ctr_max,coherence_max,IoI_max,IoR_max,error]  # 针对引导式推荐任务
+val_metric: IoI_max@1
+val_ratio: 1.0
+val_delay: 160  # 多少个epoch之后开始计算推荐的指标, e.g. 100
+
+# Config for proactive rec
+max_proactive_length: 10
+
+# Config for Tokenizer
+n_codebooks: 3
+codebook_size: 256
+expand_final: True
+token_prefix: "qwen3-embedding-8b-pca"
+token_suffix: "sem_ids"
+
+# Config for TIGER
+n_user_tokens: 1      # Number of user tokens hashed from user ids
+max_item_seq_len: 15  # Maximum #items in a sequence
+user_id_used: 0
+
+# Config for T5
+num_layers: 3
+num_decoder_layers: 3
+d_model: 128
+d_ff: 512
+num_heads: 4
+d_kv: 64
+dropout_rate: 0.1
+activation_function: "relu"
+feed_forward_proj: "relu"
+results_dir: ~
+
+sem_id_epochs: []
+
+# ==================== ProRL parameters ====================
+prorl_num_samples: 16      # Sample per rollout
+prorl_epochs: 50           # Training epochs
+prorl_warmup_steps: 0.05   # warmup ratios
+prorl_gamma: 1             # Discount Factors
+
+# ==================== log configuration ====================
+logging_steps: 100
+log_level: info
+
+# ==================== Evaluator configuration ====================
+evaluator_model: "SASRec"
