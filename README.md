@@ -227,6 +227,22 @@ ProRL/
 
 ---
 
+## 📚 Reference
+
+```
+@misc{hou2026prorleffectivereinforcementlearning,
+      title={ProRL: Effective Reinforcement Learning for Proactive Recommendation via Rectified Policy Gradient Estimation}, 
+      author={Hongru Hou and Tiehua Mei and Denghui Geng and Jinhui Huang and Ao Xu and Hengrui Chen and Jiaqing Liang and Deqing Yang},
+      year={2026},
+      eprint={2605.28293},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2605.28293}, 
+}
+```
+
+---
+
 ## 🙏 Acknowledgments
 
 - [RecBole](https://github.com/RUCAIBox/RecBole) — sequential recommendation baselines and the SASRec and GRU4Rec evaluator.
