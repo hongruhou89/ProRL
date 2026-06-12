@@ -30,7 +30,7 @@ eval_interval: 1        # Evaluate every n epochs
 save_interval: 1
 patience: 100            # Early stopping. Stop training after n epochs without improvement. Set to None to disable
 
-topk: [1,5,10]
+topk: [1]
 
 metrics: [ctr_max,coherence_max,IoI_max,IoR_max,error]
 val_metric: IoI_max@1
