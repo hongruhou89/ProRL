@@ -1,5 +1,5 @@
 # Overwritting configs
-rand_seed: 2024
+rand_seed: 1
 reproducibility: true
 proactive: 1
 
